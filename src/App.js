@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Switch, Route, withRouter} from 'react-router-dom';
+import {TransitionGroup, CSSTransition} from "react-transition-group";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "../src/assets/scss/app.scss";
+
+import {routeConfigs} from './constants/routeConfigs';
+
+class App extends Component {
+
+    componentDidMount() {
+
+    }
+
+    render() {
+        return (
+            <TransitionGroup>
+                <CSSTransition classNames="fade" timeout={300}>
+                    <Switch>
+                        {Object.keys(routeConfigs).map(pathName => (
+                            <Route {...routeConfigs[pathName]} key={`route-${pathName}`}/>
+                        ))}
+                    </Switch>
+                </CSSTransition>
+            </TransitionGroup>
+        );
+    }
 }
 
-export default App;
+export default withRouter(App);
