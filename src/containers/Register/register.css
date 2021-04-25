@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap");
+
+.Register-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4c59cf;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Register-body {
+  width: 70%;
+  height: 70%;
+  background-color: #342782;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Register-header {
+  font-family: "Ribeye Marrow", cursive;
+  color: white;
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+
+.Register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  width: 70%;
+}
+
+.Register-form input {
+  border: none;
+  outline: none;
+  height: 2.2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.Register-body .Register-button {
+  height: 3rem;
+  width: 50%;
+  align-self: center;
+  border-radius: 0.3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #4bdfe9;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.Register-signupMessage {
+  color: white;
+}

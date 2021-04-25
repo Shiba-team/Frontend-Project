@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap");
+
+.Login-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4c59cf;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login-body {
+  width: 70%;
+  height: 70%;
+  background-color: #342782;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login-body h1 {
+  font-family: "Ribeye Marrow", cursive;
+  color: white;
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+
+.Login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  width: 70%;
+}
+
+.Login-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  cursor: text;
+}
+
+.Login-input img {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.3rem;
+  cursor: text;
+}
+
+.Login-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+
+.Login-input input:-webkit-autofill,
+.Login-input input:-webkit-autofill:hover,
+.Login-input input:-webkit-autofill:focus,
+.Login-input input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px white inset !important;
+}
+
+.Login-link {
+  color: white;
+  font-weight: bold;
+}
+
+.Login-forgotPassword {
+  align-self: flex-end;
+}
+
+.Login-newAccount {
+  align-self: center;
+  text-decoration: underline;
+  font-size: 0.8rem;
+}
+
+.Login-button {
+  height: 3rem;
+  width: 50%;
+  align-self: center;
+  border-radius: 0.3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #4bdfe9;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import Header from './Header'
 import Review from './Review'
 import SelectFile from './SelectFile'
@@ -10,18 +11,9 @@ class UploadPage extends React.Component{
 		super(props)
 		this.state = {
 			owner: 'test_user',
-			step: ['upload file', 'set properties', 'review'],
-			backtrack: [],
-			files: [
-				{
-					name: 'file 1',
-					size: 14
-				}, 
-				{
-					name: 'file 2',
-					size: 25
-				}
-			],
+			steps: ['upload file', 'set properties', 'review'],
+			currentStep: 0,
+			files: [],
 			permissions: {
 				object: 'read',
 				objectPermistion: 'read',
@@ -30,40 +22,23 @@ class UploadPage extends React.Component{
 		}
 		
 		this.nextStep = () => {
-
-			if(this.state.step[0] === 'review'){
-				return
+			if(this.state.currentStep < this.state.steps.length - 1){
+				this.setState(state => {
+					return {
+						currentStep: state.currentStep + 1
+					}
+				})
 			}
-
-			if(this.state.step.length <= 1){
-				return
-			}
-
-			this.setState((state) => {
-				let step = [...state.step]
-				let backtrack = [...state.backtrack]				
-				backtrack.unshift(step.shift());
-				return {
-					step: step,
-					backtrack: backtrack
-				}
-			})
 		}
 
 		this.previousStep = () => {
-			if(this.state.backtrack.length <= 0){
-				return
+			if(this.state.currentStep > 0){
+				this.setState(state => {
+					return {
+						currentStep: state.currentStep - 1
+					}
+				})
 			}
-
-			this.setState((state) => {
-				let step = [...state.step]
-				let backtrack = [...state.backtrack]				
-				step.unshift(backtrack.shift());
-				return {
-					step: step,
-					backtrack: backtrack
-				}
-			})
 		}
 		
 		this.addFile = (newFile) => {
@@ -71,7 +46,7 @@ class UploadPage extends React.Component{
 				return
 			}
 			
-			this.setState((state) => {
+			this.setState(state => {
 				return {
 					files: [...state.files, newFile]
 				}
@@ -100,7 +75,7 @@ class UploadPage extends React.Component{
 		} 
 
 		this.content = () => {
-			switch(this.state.step[0]){
+			switch(this.state.steps[this.state.currentStep]){
 				case 'upload file':
 					return (
 						<SelectFile 
@@ -133,7 +108,7 @@ class UploadPage extends React.Component{
         return (
             <div className="UploadPage-wrapper">
                 <div className="UploadPage-body">
-                    <Header currentStep={this.state.step[0]}/>
+                    <Header currentStep={this.state.steps[this.state.currentStep]}/>
                     <div className="UploadPage-content">
 						{content}
 					</div>
@@ -147,4 +122,4 @@ class UploadPage extends React.Component{
     }
 }
 
-export default UploadPage
+export default withRouter(UploadPage) 
