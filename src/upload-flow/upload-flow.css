@@ -1,5 +1,11 @@
 .UploadPage-wrapper {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: auto;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -7,16 +13,21 @@
 }
 
 .UploadPage-body {
-  width: 40rem;
+  width: 90%;
+  height: 80%;
   padding: 1rem;
   border-top: black solid 0.1rem;
   border-bottom: black solid 0.1rem;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .UploadPage-content {
   padding: 1.5rem;
   background-color: #4d6472;
   height: 15rem;
+  flex: 1;
 }
 
 .UploadPage-navButtons {
@@ -138,6 +149,7 @@
 
 .UploadPage-selectFile-removeFile {
   margin-left: auto;
+  padding-right: 1rem;
   cursor: pointer;
 }
 
@@ -179,6 +191,7 @@
 .UploadPage-setProperties-radioSelect input,
 .UploadPage-setProperties-radioSelect label {
   cursor: pointer;
+  padding: 0.5rem;
 }
 
 .UploadPage-setProperties-permissions select {

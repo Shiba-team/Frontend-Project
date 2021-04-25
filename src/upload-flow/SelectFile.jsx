@@ -20,6 +20,12 @@ class SelectFile extends React.Component {
 			}
 			inputFile.value = ""
 		}
+
+		this.removeFile = (filename) => {
+			if(window.confirm("Xác nhận loại bỏ file này khỏi danh sách upload?")){
+				this.props.removeFile(filename)
+			}
+		}
     }
 
     render(){
@@ -40,7 +46,7 @@ class SelectFile extends React.Component {
 					    		<p className="UploadPage-selectFile-fileSize">- {i.size} Bytes</p>
 					    	</div>
 					    	<div className="UploadPage-selectFile-removeFile">
-					    		<img src={xIcon} onClick={() => this.props.removeFile(i.name)} alt="remove file icon" />
+					    		<img src={xIcon} onClick={() => this.removeFile(i.name)} alt="remove file icon" />
 					    	</div>
 					    </div>
 				    ))}
