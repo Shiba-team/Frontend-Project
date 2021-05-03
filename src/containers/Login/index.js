@@ -1,7 +1,5 @@
 import React from "react"
-import {Button} from "antd"
 import { routeConfigs } from '../../constants/routeConfigs'
-import { withRouter } from "react-router"
 import { Link } from 'react-router-dom'
 import './login.css'
 import userIcon from './icons/user.png'
