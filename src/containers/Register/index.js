@@ -51,7 +51,10 @@ class Register extends React.Component{
             }
         }
 
-        this.toLoginPage = () => {
+        this.toLoginPage = (e) => {
+            if(e !== undefined){
+                e.preventDefault()
+            }
             this.props.history.push(routeConfigs.login.path)
         }
     }
@@ -60,7 +63,7 @@ class Register extends React.Component{
 
         let bodyContent = <div>Error 404</div>
         if(this.state.status === 'fill info'){
-            bodyContent = <FillInfo submit={this.submit} />
+            bodyContent = <FillInfo submit={this.submit} toLoginPage={this.toLoginPage} />
         }
         else if (this.state.status === 'success'){
             bodyContent = <Success toLoginPage={this.toLoginPage} />
