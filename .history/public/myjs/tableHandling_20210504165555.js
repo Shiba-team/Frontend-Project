@@ -1,0 +1,19 @@
+$(document).ready(function () {
+  $("#sort").DataTable({
+    scrollY: "300px",
+    iDisplayLength: 6,
+    info: false,
+    dom:
+      '<"top">rt<"bottom"<"row"<"col-3 mt-1 pull-left"f><"col-9"p>>><"clear">',
+  });
+  $("#sort2").DataTable({
+    bAutoWidth: false,
+    scrollY: "200px",
+    aoColumns: [{ sWidth: "20%" }, { sWidth: "40%" }, { sWidth: "40%" }],
+    iDisplayLength: 3,
+    info: false,
+    searching: false,
+    dom:
+      '<"top">rt<"bottom"<"row"<"col-3 mt-1 pull-left"f><"col-9"p>>><"clear">',
+  });
+});
