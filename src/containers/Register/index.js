@@ -1,6 +1,6 @@
 import React from "react"
 import { routeConfigs } from '../../constants/routeConfigs'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import './register.css'
 import FillInfo from './FillInfo'
 import Success from './Success'

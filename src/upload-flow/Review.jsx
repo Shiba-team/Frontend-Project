@@ -13,7 +13,7 @@ class Review extends React.Component{
                     <span>{nFile} File</span>
                     <span>Size: {totalSize} Bytes</span>
                 </div>
-                <p>Properties</p>
+                <p className="mt-3">Properties</p>
                 <div className="UploadFile-review-properties">
                     <span>1 Grantess</span>
                 </div>

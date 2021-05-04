@@ -1,0 +1,33 @@
+.home .banner {
+  background-color: #3f92f3;
+  color: #ffffff;
+  text-align: center;
+  padding: 80px 0px;
+}
+
+.home .banner .title {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.home .banner .subtitle {
+  font-size: 20px;
+}
+
+.home .intro {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 16px 0px;
+}
+
+.home .row .col-md-3 .content {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 16px;
+  width: 95%;
+}
+
+.home .row .col-md-3 .content .label {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
