@@ -25,7 +25,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Building application
-      run: npm run build
+      run: |
+        npm install
+        npm run build
       
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
