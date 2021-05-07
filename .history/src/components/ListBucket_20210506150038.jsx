@@ -15,28 +15,18 @@ class ListBucket extends Component {
     this.state = {
       buckets: [],
       showDelete: false,
-      colNumber: 2,
-      recycleBin: [],
     }
   }
 
   showDeleteAction = () => {
     this.setState({
-      showDelete:true,
+      showDelete:true
     })
   }
 
   hideDeleteAction = () => {
     this.setState({
-      showDelete: false,
-    })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.$(`#row_${id}`).css('display', 'table-row');
-    }
-    this.setState({
-      recycleBin: [],
+      showDelete: false
     })
   }
 
@@ -61,6 +51,12 @@ class ListBucket extends Component {
         scrollY: "350px",
         iDisplayLength: 6,
         info: false,
+        "aoColumnDefs":[
+          {
+              "aTargets":[4],
+              "mData": null
+          }
+      ],
         dom:
           '<"top">rt<"bottom"<"row"<"col-3 mt-1 pull-left"f><"col-9"p>>><"clear">',
       });
@@ -68,62 +64,33 @@ class ListBucket extends Component {
   }
 
   buildRow = (bucket) =>{
-    const id = 'row_'+bucket.id;
     return (
-      <tr id={id}>
+      <tr>
       <td> {bucket.id} </td> 
       <td> {bucket.bucketName}</td> 
-      <td className="row"> <div className="col-10 my-auto">{bucket.lastUpdate}</div> <div className="col-2 my-auto">{this.addDeleteButton(bucket.id)}</div></td>
+      <td> {bucket.lastUpdate} </td>
+      {this.addDeleteButton()}
       </tr>
     )
   }
 
-  addDeleteButton = (id) =>{
+  addDeleteCol = () =>{
     if (this.state.showDelete===true)
-    return (
-      <button type="button" className="btn btn-danger alignButton" onClick={()=> this.deleteRow(id)}><i class="fa fa-trash"></i></button>)
+    return (<th>
+      Action
+    </th>)
     else return;
   }
 
-  addApplyButton = () => {
+  addDeleteButton = () =>{
     if (this.state.showDelete===true)
-    return (
-      <button type="button" className="btn btn-success" onClick={this.applyDeleteAction}>Apply Changes</button>)
+    return (<td>
+      <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+    </td>)
     else return;
-  }
-
-  applyDeleteAction =() =>{
-    this.setState({
-      showDelete: false
-    })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.row(`#row_${id}`).remove().draw(false);
-    }
-    this.setState({
-      recycleBin: [],
-    })
-  }
-
-  deleteRow = (id) =>{
-    ///const listbuckets = this.state.buckets.filter((row) => row.id !== id);
-    //this.setState({
-    //  buckets: listbuckets,
-    //})
-    let bin = this.state.recycleBin;
-    bin.push(id);
-    this.setState({
-      recycleBin: bin,
-    })
-    let table = $('#sort').DataTable();
-    $(`#row_${id}`).hide();
-    table.order( [[ 0, 'asc' ]] )
-    .draw( false );
   }
 
   render() {
-    let listbuckets = this.state.buckets;
     return (
       <div className="col-8">
         <CrudButton open={this.props.open} showDeleteAction={this.showDeleteAction} hideDeleteAction={this.hideDeleteAction} showDelete = {this.state.showDelete}/>
@@ -131,23 +98,17 @@ class ListBucket extends Component {
           <table id="sort" className="table table-hover w-100" >
             <thead>
               <tr className="bg-info text-white">
-                <th> ID </th> <th> Bucket Name </th> <th> Last Update </th>
+                <th> ID </th> <th> Bucket Name </th> <th> Last Update </th> {this.addDeleteCol()}
               </tr>
             </thead>
             <tbody id="actor">
             {
-              listbuckets.map((bucket) => {
+              this.state.buckets.map((bucket) => {
                 return this.buildRow(bucket)
               })
             }
             </tbody>
           </table>
-        </div>
-        <div className="row pt-3" style={{height: 50}}>
-        <div className="col-10"></div>
-        
-        <div className="col-2">{this.addApplyButton()}
-        </div> 
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ class CrudButton extends Component {
   }
 
   handleDelete = () =>{
-    if (this.props.showDelete === false)
+    if (this.props.showDelete === true)
     return (<div className="col-4 d-flex justify-content-center align-items-center">
     <a href="#" className="btn btn-danger pl-5 pr-5" onClick={this.props.showDeleteAction}>
       <i className="fa fa-trash"> </i>&nbsp;Delete Bucket
@@ -15,7 +15,7 @@ class CrudButton extends Component {
   </div>)
   else return (
     <div className="col-4 d-flex justify-content-center align-items-center">
-    <a href="#" className="btn btn-danger pl-5 pr-5" onClick={this.props.hideDeleteAction}>
+    <a href="#" className="btn btn-danger pl-5 pr-5" onClick={this.props.showDeleteAction}>
       <i className="fa fa-trash"> </i>&nbsp;Discard changes
     </a>
   </div>

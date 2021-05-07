@@ -27,7 +27,11 @@ table.dataTable thead td {
 }
 
 #sort tbody td {
-  height: 3.8vh;
+  height: 3.9vh;
+}
+
+.alignButton {
+  margin-left: 80px;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
@@ -39,7 +43,7 @@ table.dataTable thead td {
 }
 
 .mycontainer {
-  height: 650px;
+  height: 60vh;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   width: 90%;

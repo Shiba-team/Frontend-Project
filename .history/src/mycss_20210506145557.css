@@ -39,7 +39,7 @@ table.dataTable thead td {
 }
 
 .mycontainer {
-  height: 650px;
+  height: 60vh;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   width: 90%;

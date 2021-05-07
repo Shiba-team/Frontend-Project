@@ -17,24 +17,22 @@ class ListBucket extends Component {
       showDelete: false,
       colNumber: 2,
       recycleBin: [],
+      onShowRow: true,
     }
   }
 
   showDeleteAction = () => {
     this.setState({
       showDelete:true,
+      onShowRow: false,
     })
   }
 
   hideDeleteAction = () => {
     this.setState({
-      showDelete: false,
+      showDelete: false
     })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.$(`#row_${id}`).css('display', 'table-row');
-    }
+    $(`tr`).show();
     this.setState({
       recycleBin: [],
     })

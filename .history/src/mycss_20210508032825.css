@@ -38,6 +38,10 @@ table.dataTable thead td {
   border: 1px solid #5bc0de !important;
 }
 
+.mustShow {
+  display: block;
+}
+
 .mycontainer {
   height: 650px;
   border-top: 1px solid gray;

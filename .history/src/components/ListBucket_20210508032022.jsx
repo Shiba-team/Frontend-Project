@@ -30,11 +30,6 @@ class ListBucket extends Component {
     this.setState({
       showDelete: false,
     })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.$(`#row_${id}`).css('display', 'table-row');
-    }
     this.setState({
       recycleBin: [],
     })

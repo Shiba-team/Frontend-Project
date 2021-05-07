@@ -16,27 +16,18 @@ class ListBucket extends Component {
       buckets: [],
       showDelete: false,
       colNumber: 2,
-      recycleBin: [],
     }
   }
 
   showDeleteAction = () => {
     this.setState({
-      showDelete:true,
+      showDelete:true
     })
   }
 
   hideDeleteAction = () => {
     this.setState({
-      showDelete: false,
-    })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.$(`#row_${id}`).css('display', 'table-row');
-    }
-    this.setState({
-      recycleBin: [],
+      showDelete: false
     })
   }
 
@@ -88,22 +79,8 @@ class ListBucket extends Component {
   addApplyButton = () => {
     if (this.state.showDelete===true)
     return (
-      <button type="button" className="btn btn-success" onClick={this.applyDeleteAction}>Apply Changes</button>)
+      <button type="button" className="btn btn-success" onClick={this.hideDeleteAction}>Apply Changes</button>)
     else return;
-  }
-
-  applyDeleteAction =() =>{
-    this.setState({
-      showDelete: false
-    })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.row(`#row_${id}`).remove().draw(false);
-    }
-    this.setState({
-      recycleBin: [],
-    })
   }
 
   deleteRow = (id) =>{
@@ -111,15 +88,8 @@ class ListBucket extends Component {
     //this.setState({
     //  buckets: listbuckets,
     //})
-    let bin = this.state.recycleBin;
-    bin.push(id);
-    this.setState({
-      recycleBin: bin,
-    })
     let table = $('#sort').DataTable();
-    $(`#row_${id}`).hide();
-    table.order( [[ 0, 'asc' ]] )
-    .draw( false );
+    table.row(`#row_${id}`).remove().draw( false );
   }
 
   render() {

@@ -22,18 +22,19 @@ class ListBucket extends Component {
 
   showDeleteAction = () => {
     this.setState({
-      showDelete:true,
+      showDelete:true
     })
   }
 
   hideDeleteAction = () => {
     this.setState({
-      showDelete: false,
+      showDelete: false
     })
-    let table = $('#sort').DataTable();
+    let table = $('#sort').dataTable();
     for (let i = 0; i<this.state.recycleBin.length; i++){
       let id = this.state.recycleBin[i];
-      table.$(`#row_${id}`).css('display', 'table-row');
+      let bucket = this.state.buckets.find(b => b.id===id);
+      table.append(this.buildRow(bucket));
     }
     this.setState({
       recycleBin: [],
@@ -88,22 +89,8 @@ class ListBucket extends Component {
   addApplyButton = () => {
     if (this.state.showDelete===true)
     return (
-      <button type="button" className="btn btn-success" onClick={this.applyDeleteAction}>Apply Changes</button>)
+      <button type="button" className="btn btn-success" onClick={this.hideDeleteAction}>Apply Changes</button>)
     else return;
-  }
-
-  applyDeleteAction =() =>{
-    this.setState({
-      showDelete: false
-    })
-    let table = $('#sort').DataTable();
-    for (let i = 0; i<this.state.recycleBin.length; i++){
-      let id = this.state.recycleBin[i];
-      table.row(`#row_${id}`).remove().draw(false);
-    }
-    this.setState({
-      recycleBin: [],
-    })
   }
 
   deleteRow = (id) =>{
@@ -117,9 +104,7 @@ class ListBucket extends Component {
       recycleBin: bin,
     })
     let table = $('#sort').DataTable();
-    $(`#row_${id}`).hide();
-    table.order( [[ 0, 'asc' ]] )
-    .draw( false );
+    table.row(`#row_${id}`).remove().draw( false );
   }
 
   render() {

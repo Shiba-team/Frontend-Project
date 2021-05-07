@@ -6,22 +6,6 @@ class CrudButton extends Component {
     super(props);
   }
 
-  handleDelete = () =>{
-    if (this.props.showDelete === false)
-    return (<div className="col-4 d-flex justify-content-center align-items-center">
-    <a href="#" className="btn btn-danger pl-5 pr-5" onClick={this.props.showDeleteAction}>
-      <i className="fa fa-trash"> </i>&nbsp;Delete Bucket
-    </a>
-  </div>)
-  else return (
-    <div className="col-4 d-flex justify-content-center align-items-center">
-    <a href="#" className="btn btn-danger pl-5 pr-5" onClick={this.props.hideDeleteAction}>
-      <i className="fa fa-trash"> </i>&nbsp;Discard changes
-    </a>
-  </div>
-  )
-  }
-
   render() {
     return (
       <div className="row w-100 pb-3">
@@ -34,7 +18,11 @@ class CrudButton extends Component {
             <i className="fa fa-plus"> </i>&nbsp;Add Bucket
           </a>
         </div>
-        {this.handleDelete()}
+        <div className="col-4 d-flex justify-content-center align-items-center">
+          <a href="#" className="btn btn-danger pl-5 pr-5">
+            <i className="fa fa-trash"> </i>&nbsp;Delete Bucket
+          </a>
+        </div>
         <div className="col-4 d-flex justify-content-center align-items-center">
           <a href="#" className="btn btn-warning pl-5 pr-5">
             <i className="fa fa-minus"> </i>&nbsp;Empty Bucket
