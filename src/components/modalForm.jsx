@@ -4,6 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import Bucket from "./modalComponents/Bucket";
 import Properties from "./modalComponents/Properties";
 import Review from "./modalComponents/Review";
+import $ from 'jquery'; 
 
 class ModalForm extends Component {
   constructor(props) {
@@ -40,41 +41,66 @@ prevStep = () => {
     })
 }
 
+resetModal = () =>{
+  this.setState({
+      step : 1,
+      prog: 33,
+      itemActive: 1,
+      bucketName: '',
+      selection: '',
+  })
+}
+
 handleChange = input => event => {
     this.setState({ [input] : event.target.value })
 }
 
+handlePage = () => {
+  const {step} = this.state;
+  const { bucketName, selection } = this.state;
+  const values = { bucketName, selection };
+  console.log(step + values)
+  switch(step) {
+    default:
+      return <h1>User Forms not working. Enable Javascript!</h1>;
+    case 1:
+        return <Bucket
+                nextStep={this.nextStep}
+                handleChange = {this.handleChange}
+                values={values}
+                />;
+    case 2:
+        return <Properties
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                handleChange = {this.handleChange}
+                values={values}
+                />;
+                
+    case 3:
+        return <Review
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                values={values}
+                />;
+                
+  }           
+}
+
+handleForm = event =>{
+  event.preventDefault();
+  let newBucket = {
+    id: this.props.bucketsLength+1,
+    bucketName: this.state.bucketName,
+    lastUpdate: new Date().toString(),
+  }
+  this.props.addNewBucket(newBucket);
+  this.resetModal();
+  this.props.close();
+}
+
   render() {
-    const {step} = this.state;
-    const { bucketName, selection } = this.state;
-    const values = { bucketName, selection };
-    let tmp;
-    switch(step) {
-      default:
-        return <h1>User Forms not working. Enable Javascript!</h1>;
-      case 1:
-          tmp = <Bucket
-                  nextStep={this.nextStep}
-                  handleChange = {this.handleChange}
-                  values={values}
-                  />;
-                  break;
-      case 2:
-          tmp = <Properties
-                  nextStep={this.nextStep}
-                  prevStep={this.prevStep}
-                  handleChange = {this.handleChange}
-                  values={values}
-                  />;
-                  break;
-      case 3:
-          tmp = <Review
-                  nextStep={this.nextStep}
-                  prevStep={this.prevStep}
-                  values={values}
-                  />;
-                  break;
-    }                
+         
     return (
       <div>
       <Modal
@@ -91,7 +117,7 @@ handleChange = input => event => {
                     <div className="card px-0 pt-4 pb-0 mt-3 mb-3">
                       <h2 id="heading"> Create bucket </h2>
                       <p> Fill all form field to go to next step </p>
-                      <form id="msform" method="POST">
+                      <form id="msform" method="POST" onSubmit={this.handleForm}>
                         <ul id="progressbar">
                           <li className="active" id="bucket">
                             <strong> Bucket </strong>
@@ -106,7 +132,7 @@ handleChange = input => event => {
                         <ProgressBar animated now={this.state.prog} />
                         <br />
                         
-                        {tmp}
+                        {this.handlePage()}
                         
                       </form>
                     </div>

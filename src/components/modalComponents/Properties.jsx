@@ -1,7 +1,23 @@
 import React, { Component } from "react";
 import { Fade } from '@material-ui/core';
+import faker from "faker";
+
+
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables"
+import $ from 'jquery';
+
+import "../../mycss.css"
 
 class Properties extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+    }
+  }
+    
     next = (e) => {
         e.preventDefault()
         this.props.nextStep()
@@ -10,6 +26,106 @@ class Properties extends Component {
     back  = (e) => {
         e.preventDefault();
         this.props.prevStep();
+    }
+
+    componentDidMount() {
+      let listUsers = this.state.users;
+      for (let i = 0; i < 25; i++)
+      {
+        const user = {
+          userName: faker.name.findName(),
+        }
+        listUsers.push(user);
+      }
+      this.setState({
+        users: listUsers,
+      })
+      $(document).ready(function () {
+        $("#sort2").DataTable({
+          pagingType: "numbers",
+          bAutoWidth: false,
+          scrollY: "200px",
+          scrollCollapse: true,
+          aoColumns: [{ sWidth: "28%" }, { sWidth: "36%" }, { sWidth: "36%" }],
+          iDisplayLength: 3,
+          info: false,
+          searching: false,
+          bLengthChange: false,
+          dom:
+            '<"top">rt<"bottom"<"row"<"col-3 mt-1 pull-left"f><"col-9"p>>><"clear">',
+        });
+      });
+    }
+
+    buildRow = (user, id)=>{
+      return (<tr>
+        <td> {user.userName} </td>
+        <td>
+          <div className="row justify-content-center ">
+            <div className="custom-control custom-checkbox col-4 ">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id={"customCheck1_"+ id}
+                name={"example1_" + id}
+              />
+              <label
+                className="custom-control-label"
+                for={"customCheck1_"+id}
+              >
+                Read
+              </label>
+            </div>
+            <div className="custom-control custom-checkbox col-4 ">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id={"customCheck2_"+id}
+                name={"example2_"+id}
+              />
+              <label
+                className="custom-control-label"
+                for={"customCheck2_"+id}
+              >
+                Write
+              </label>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div className="row justify-content-center ">
+            <div className="custom-control custom-checkbox col-4 ">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id={"customCheck3_"+id}
+                name={"example3_"+id}
+              />
+              <label
+                className="custom-control-label"
+                for={"customCheck3_"+id}
+              >
+                Read
+              </label>
+            </div>
+            <div className="custom-control custom-checkbox col-4 ">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id={"customCheck4_"+id}
+                name={"example4_"+id}
+              />
+              <label
+                className="custom-control-label"
+                for={"customCheck4_"+id}
+              >
+                Write
+              </label>
+            </div>
+          </div>
+        </td>
+      </tr>
+      );
     }
 
     render(){
@@ -28,8 +144,7 @@ class Properties extends Component {
                               </div>
                             </div>
                             <label className="fieldlabels">Manage user:</label>
-                            <table
-                              id="sort2"
+                            <table id="sort2"
                               className="table table-hover w-100"
                             >
                               <thead>
@@ -39,73 +154,11 @@ class Properties extends Component {
                                 </tr>
                               </thead>
                               <tbody id="actor_container">
-                                <tr>
-                                  <td> </td>
-                                  <td>
-                                    <div className="row justify-content-center ">
-                                      <div className="custom-control custom-checkbox col-4 ">
-                                        <input
-                                          type="checkbox"
-                                          className="custom-control-input"
-                                          id="customCheck1_{{actor_id}}"
-                                          name="example1_{{actor_id}}"
-                                        />
-                                        <label
-                                          className="custom-control-label"
-                                          for="customCheck1_{{actor_id}}"
-                                        >
-                                          Read
-                                        </label>
-                                      </div>
-                                      <div className="custom-control custom-checkbox col-4 ">
-                                        <input
-                                          type="checkbox"
-                                          className="custom-control-input"
-                                          id="customCheck2_{{actor_id}}"
-                                          name="example2_{{actor_id}}"
-                                        />
-                                        <label
-                                          className="custom-control-label"
-                                          for="customCheck2_{{actor_id}}"
-                                        >
-                                          Write
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <div className="row justify-content-center ">
-                                      <div className="custom-control custom-checkbox col-4 ">
-                                        <input
-                                          type="checkbox"
-                                          className="custom-control-input"
-                                          id="customCheck3_{{actor_id}}"
-                                          name="example3_{{actor_id}}"
-                                        />
-                                        <label
-                                          className="custom-control-label"
-                                          for="customCheck3_{{actor_id}}"
-                                        >
-                                          Read
-                                        </label>
-                                      </div>
-                                      <div className="custom-control custom-checkbox col-4 ">
-                                        <input
-                                          type="checkbox"
-                                          className="custom-control-input"
-                                          id="customCheck4_{{actor_id}}"
-                                          name="example4_{{actor_id}}"
-                                        />
-                                        <label
-                                          className="custom-control-label"
-                                          for="customCheck4_{{actor_id}}"
-                                        >
-                                          Write
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
+                                {
+                                  this.state.users.map((user, id) => {
+                                    return this.buildRow(user,id);
+                                  })
+                                }
                               </tbody>
                             </table>
                             <label className="fieldlabels">
