@@ -30,10 +30,6 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
     let listbucket = this.state.buckets;
     listbucket.push(bucket);

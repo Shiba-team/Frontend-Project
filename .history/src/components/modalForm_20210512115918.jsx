@@ -4,7 +4,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import Bucket from "./modalComponents/Bucket";
 import Properties from "./modalComponents/Properties";
 import Review from "./modalComponents/Review";
-import $ from 'jquery'; 
 
 class ModalForm extends Component {
   constructor(props) {
@@ -95,6 +94,9 @@ handleForm = event =>{
     lastUpdate: new Date().toString(),
   }
   this.props.addNewBucket(newBucket);
+  var table = $('#sort').DataTable();
+  table.clear();
+  rows.add(dataSet).draw();
   this.resetModal();
   this.props.close();
 }

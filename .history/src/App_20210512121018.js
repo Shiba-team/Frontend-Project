@@ -30,16 +30,16 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
     let listbucket = this.state.buckets;
     listbucket.push(bucket);
     this.setState({
       buckets: listbucket,
     });
+    let table = $("#sort").DataTable();
+    table.clear().draw();
+    table.rows.add(this.state.buckets);
+    table.draw();
   };
 
   close = () => {

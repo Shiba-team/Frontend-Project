@@ -13,6 +13,7 @@ class ListBucket extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      buckets: this.props.buckets,
       showDelete: false,
       colNumber: 2,
       recycleBin: [],
@@ -40,6 +41,9 @@ class ListBucket extends Component {
   }
 
   componentDidMount(){
+    this.setState({
+      buckets: this.props.buckets,
+    })
     $(document).ready(function () {
       $("#sort").DataTable({
         "pagingType": "numbers",
@@ -121,7 +125,7 @@ class ListBucket extends Component {
             </thead>
             <tbody id="actor">
             {
-              this.props.buckets.map((bucket) => {
+              this.state.buckets.map((bucket) => {
                 return this.buildRow(bucket)
               })
             }

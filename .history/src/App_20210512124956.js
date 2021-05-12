@@ -35,10 +35,16 @@ class App extends Component {
   }
 
   addNewBucket = (bucket) => {
-    let listbucket = this.state.buckets;
-    listbucket.push(bucket);
-    this.setState({
-      buckets: listbucket,
+    //let listbucket = this.state.buckets;
+    //listbucket.push(bucket);
+    //this.setState({
+    //  buckets: listbucket,
+    //});
+    var table = $("#sort").DataTable();
+    table.row.add({
+      id: `bucket.id`,
+      bucketName: `bucket.bucketName`,
+      lastUpdate: `bucket.lastUpdate`,
     });
   };
 

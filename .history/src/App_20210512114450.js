@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import ListBucket from "./components/ListBucket.jsx";
 import UserInfo from "./components/UserInfo.jsx";
 import ModalForm from "./components/modalForm.jsx";
-import faker from "faker";
-import $ from "jquery";
 
 class App extends Component {
   constructor() {
@@ -30,15 +28,11 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
-    let listbucket = this.state.buckets;
-    listbucket.push(bucket);
+    let bucket = this.state.buckets;
+    bucket.push(bucket);
     this.setState({
-      buckets: listbucket,
+      buckets: bucket,
     });
   };
 
@@ -57,14 +51,14 @@ class App extends Component {
           <ListBucket
             open={this.open}
             makeBucketList={this.makeBucketList}
-            buckets={this.state.buckets}
+            bucket={this.state.buckets}
           ></ListBucket>
         </div>
         <ModalForm
           showModal={this.state.showModal}
           close={this.close}
           addNewBucket={this.addNewBucket}
-          bucketsLength={this.state.buckets.length}
+          bucket={this.state.bucket}
         ></ModalForm>
       </div>
     );

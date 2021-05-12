@@ -30,10 +30,6 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
     let listbucket = this.state.buckets;
     listbucket.push(bucket);
@@ -58,7 +54,9 @@ class App extends Component {
             open={this.open}
             makeBucketList={this.makeBucketList}
             buckets={this.state.buckets}
-          ></ListBucket>
+          >
+            {this.makeBucketList()}
+          </ListBucket>
         </div>
         <ModalForm
           showModal={this.state.showModal}

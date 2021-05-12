@@ -3,7 +3,6 @@ import ListBucket from "./components/ListBucket.jsx";
 import UserInfo from "./components/UserInfo.jsx";
 import ModalForm from "./components/modalForm.jsx";
 import faker from "faker";
-import $ from "jquery";
 
 class App extends Component {
   constructor() {
@@ -30,16 +29,17 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
     let listbucket = this.state.buckets;
     listbucket.push(bucket);
     this.setState({
       buckets: listbucket,
     });
+    let table = $("#sort").DataTable();
+    table.clear();
+    table.rows.add(this.state.buckets);
+    table.draw();
+    alert(this.state.buckets.length);
   };
 
   close = () => {

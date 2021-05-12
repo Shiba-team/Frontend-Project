@@ -13,6 +13,7 @@ class ListBucket extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      buckets: this.props.buckets,
       showDelete: false,
       colNumber: 2,
       recycleBin: [],
@@ -40,6 +41,7 @@ class ListBucket extends Component {
   }
 
   componentDidMount(){
+    this.props.makeBucketList();
     $(document).ready(function () {
       $("#sort").DataTable({
         "pagingType": "numbers",
@@ -109,6 +111,7 @@ class ListBucket extends Component {
   }
 
   render() {
+    alert(this.state.buckets.length);
     return (
       <div className="col-8">
         <CrudButton open={this.props.open} showDeleteAction={this.showDeleteAction} hideDeleteAction={this.hideDeleteAction} showDelete = {this.state.showDelete}/>
@@ -121,7 +124,7 @@ class ListBucket extends Component {
             </thead>
             <tbody id="actor">
             {
-              this.props.buckets.map((bucket) => {
+              this.state.buckets.map((bucket) => {
                 return this.buildRow(bucket)
               })
             }

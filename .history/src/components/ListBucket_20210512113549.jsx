@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CrudButton from "./CrudButton";
-
+import faker from "faker";
 
 
 import "datatables.net-dt/js/dataTables.dataTables"
@@ -13,6 +13,7 @@ class ListBucket extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      buckets: this.props.buckets,
       showDelete: false,
       colNumber: 2,
       recycleBin: [],
@@ -40,6 +41,7 @@ class ListBucket extends Component {
   }
 
   componentDidMount(){
+    this.props.makeBucketList();
     $(document).ready(function () {
       $("#sort").DataTable({
         "pagingType": "numbers",
@@ -109,6 +111,7 @@ class ListBucket extends Component {
   }
 
   render() {
+    let listbuckets = this.state.buckets;
     return (
       <div className="col-8">
         <CrudButton open={this.props.open} showDeleteAction={this.showDeleteAction} hideDeleteAction={this.hideDeleteAction} showDelete = {this.state.showDelete}/>
@@ -121,7 +124,7 @@ class ListBucket extends Component {
             </thead>
             <tbody id="actor">
             {
-              this.props.buckets.map((bucket) => {
+              listbuckets.map((bucket) => {
                 return this.buildRow(bucket)
               })
             }

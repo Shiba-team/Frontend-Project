@@ -95,6 +95,8 @@ handleForm = event =>{
     lastUpdate: new Date().toString(),
   }
   this.props.addNewBucket(newBucket);
+  var table = $('#sort').DataTable();
+  table.clear();
   this.resetModal();
   this.props.close();
 }

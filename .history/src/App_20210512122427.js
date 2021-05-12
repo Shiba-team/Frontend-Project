@@ -30,10 +30,6 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.makeBucketList();
-  }
-
   addNewBucket = (bucket) => {
     let listbucket = this.state.buckets;
     listbucket.push(bucket);
@@ -50,6 +46,7 @@ class App extends Component {
     this.setState({ showModal: true });
   };
   render() {
+    this.props.makeBucketList();
     return (
       <div class="mycontainer  d-flex justify-content-center align-items-center ">
         <div class="row w-100">

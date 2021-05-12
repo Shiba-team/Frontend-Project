@@ -121,7 +121,7 @@ class ListBucket extends Component {
             </thead>
             <tbody id="actor">
             {
-              this.props.buckets.map((bucket) => {
+              this.state.buckets.map((bucket) => {
                 return this.buildRow(bucket)
               })
             }
