@@ -70,6 +70,10 @@ class UploadPage extends React.Component {
       });
     };
 
+    this.uploadFiles = () => {
+      this.props.history.push(routeConfigs.manageBucket.path)
+    }
+
     this.setPermissions = (newPermissions) => {
       this.setState({
         permissions: newPermissions,
@@ -110,7 +114,7 @@ class UploadPage extends React.Component {
           <div className="UploadPage-content">{content}</div>
           <div className="UploadPage-navButtons">
             <button onClick={this.previousStep}>Cancel</button>
-            <button onClick={this.nextStep}>Next</button>
+            <button onClick={this.state.steps[this.state.currentStep] !== "review" ? this.nextStep : this.uploadFiles}>Next</button>
           </div>
         </div>
       </div>
