@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Fade } from '@material-ui/core';
 import faker from "faker";
-
+import {MDBDataTable, MDBTableHead, MDBTableBody} from "mdbreact";
 
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
@@ -40,21 +40,6 @@ class Properties extends Component {
       this.setState({
         users: listUsers,
       })
-      $(document).ready(function () {
-        $("#sort2").DataTable({
-          pagingType: "numbers",
-          bAutoWidth: false,
-          scrollY: "200px",
-          scrollCollapse: true,
-          aoColumns: [{ sWidth: "28%" }, { sWidth: "36%" }, { sWidth: "36%" }],
-          iDisplayLength: 3,
-          info: false,
-          searching: false,
-          bLengthChange: false,
-          dom:
-            '<"top">rt<"bottom"<"row"<"col-3 mt-1 pull-left"f><"col-9"p>>><"clear">',
-        });
-      });
     }
 
     buildRow = (user, id)=>{
@@ -144,23 +129,21 @@ class Properties extends Component {
                               </div>
                             </div>
                             <label className="fieldlabels">Manage user:</label>
-                            <table id="sort2"
-                              className="table table-hover w-100"
-                            >
-                              <thead>
-                                <tr className="bg-info text-white">
+                            <MDBDataTable striped info={false} entries={6} displayEntries={false} noBottomColumns>
+                              <MDBTableHead color="primary-color" textWhite>
+                                <tr>
                                   <th> Username </th> <th> Object </th>
                                   <th> Object Permissions </th>
                                 </tr>
-                              </thead>
-                              <tbody id="actor_container">
+                              </MDBTableHead>
+                              <MDBTableBody id="actor_container">
                                 {
                                   this.state.users.map((user, id) => {
                                     return this.buildRow(user,id);
                                   })
                                 }
-                              </tbody>
-                            </table>
+                              </MDBTableBody>
+                            </MDBDataTable>
                             <label className="fieldlabels">
                               Manage public permissions:
                             </label>

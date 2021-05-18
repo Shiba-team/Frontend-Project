@@ -24,7 +24,7 @@ class CrudButton extends Component {
 
   render() {
     return (
-      <div className="row w-100 pb-3">
+      <div className="row w-100 pb-4 mt-4">
         <div className="col-4 d-flex justify-content-center align-items-center">
           <a
             href="#"

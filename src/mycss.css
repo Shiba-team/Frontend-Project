@@ -20,18 +20,12 @@ table.dataTable thead td {
   border-bottom: 0 !important;
 }
 
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-  border-bottom: 1px solid #ccc !important;
-  margin-bottom: 20px;
-  overflow-x: hidden !important;
+.table tbody td {
+  height: 65px;
 }
 
-#sort tbody td {
-  height: 3.8vh;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+.dataTables_wrapper .dataTables_paginate .page-item.active .page-link,
+.dataTables_wrapper .dataTables_paginate .page-item .page-link:hover {
   color: white !important;
   background: #5bc0de !important;
   border-radius: 4px !important;
