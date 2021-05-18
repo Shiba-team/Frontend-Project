@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Fade } from '@material-ui/core';
 import faker from "faker";
-import {MDBDataTable, MDBTableHead, MDBTableBody} from "mdbreact";
+import {MDBTable, MDBTableHead, MDBTableBody} from "mdbreact";
 
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
@@ -30,7 +30,7 @@ class Properties extends Component {
 
     componentDidMount() {
       let listUsers = this.state.users;
-      for (let i = 0; i < 25; i++)
+      for (let i = 0; i < 3; i++)
       {
         const user = {
           userName: faker.name.findName(),
@@ -42,21 +42,21 @@ class Properties extends Component {
       })
     }
 
-    buildRow = (user, id)=>{
+    buildRow = (user)=>{
       return (<tr>
-        <td> {user.userName} </td>
-        <td>
+        <td width="30%"> {user.userName} </td>
+        <td width="35%">
           <div className="row justify-content-center ">
             <div className="custom-control custom-checkbox col-4 ">
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id={"customCheck1_"+ id}
-                name={"example1_" + id}
+                id={"customCheck1_"+ user.id}
+                name={"example1_" + user.id}
               />
               <label
                 className="custom-control-label"
-                for={"customCheck1_"+id}
+                for={"customCheck1_"+user.id}
               >
                 Read
               </label>
@@ -65,30 +65,30 @@ class Properties extends Component {
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id={"customCheck2_"+id}
-                name={"example2_"+id}
+                id={"customCheck2_"+user.id}
+                name={"example2_"+user.id}
               />
               <label
                 className="custom-control-label"
-                for={"customCheck2_"+id}
+                for={"customCheck2_"+user.id}
               >
                 Write
               </label>
             </div>
           </div>
         </td>
-        <td>
+        <td width="35%">
           <div className="row justify-content-center ">
             <div className="custom-control custom-checkbox col-4 ">
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id={"customCheck3_"+id}
-                name={"example3_"+id}
+                id={"customCheck3_"+user.id}
+                name={"example3_"+user.id}
               />
               <label
                 className="custom-control-label"
-                for={"customCheck3_"+id}
+                for={"customCheck3_"+user.id}
               >
                 Read
               </label>
@@ -97,12 +97,12 @@ class Properties extends Component {
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id={"customCheck4_"+id}
-                name={"example4_"+id}
+                id={"customCheck4_"+user.id}
+                name={"example4_"+user.id}
               />
               <label
                 className="custom-control-label"
-                for={"customCheck4_"+id}
+                for={"customCheck4_"+user.id}
               >
                 Write
               </label>
@@ -129,8 +129,8 @@ class Properties extends Component {
                               </div>
                             </div>
                             <label className="fieldlabels">Manage user:</label>
-                            <MDBDataTable striped info={false} entries={6} displayEntries={false} noBottomColumns>
-                              <MDBTableHead color="primary-color" textWhite>
+                            <MDBTable hover striped>
+                              <MDBTableHead color="bg-info" textWhite>
                                 <tr>
                                   <th> Username </th> <th> Object </th>
                                   <th> Object Permissions </th>
@@ -138,12 +138,12 @@ class Properties extends Component {
                               </MDBTableHead>
                               <MDBTableBody id="actor_container">
                                 {
-                                  this.state.users.map((user, id) => {
-                                    return this.buildRow(user,id);
+                                  this.state.users.map((user) => {
+                                    return this.buildRow(user);
                                   })
                                 }
                               </MDBTableBody>
-                            </MDBDataTable>
+                            </MDBTable>
                             <label className="fieldlabels">
                               Manage public permissions:
                             </label>
