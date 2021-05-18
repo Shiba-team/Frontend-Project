@@ -7,7 +7,7 @@ import {MDBDataTable, MDBTableHead, MDBTableBody} from "mdbreact";
 import "datatables.net-dt/js/dataTables.dataTables"
 import $ from 'jquery';
 
-import "../../mycss.css"
+import "../../assets/css/mycss.css"
 
 class Properties extends Component {
 

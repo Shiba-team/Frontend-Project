@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import CrudButton from "./CrudButton";
 import {MDBDataTableV5} from "mdbreact";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import "../mycss.css"
+import "../assets/css/mycss.css"
 
 
 class ListBucket extends Component {
