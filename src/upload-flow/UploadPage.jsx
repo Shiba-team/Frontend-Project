@@ -71,7 +71,9 @@ class UploadPage extends React.Component {
     };
 
     this.uploadFiles = () => {
-      this.props.history.push(routeConfigs.manageBucket.path)
+      // upload file
+
+      this.props.history.push(routeConfigs.detailBucket.path)
     }
 
     this.setPermissions = (newPermissions) => {

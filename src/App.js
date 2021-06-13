@@ -9,6 +9,21 @@ import Header from "./components/Header";
 class App extends Component {
   constructor() {
     super();
+    this.state = {
+      userId: '12345678',
+      loginToken: 'abcdef'
+    }
+
+    this.updateUserInfo = (userId, loginToken) => {
+      this.setState({
+        userId: userId,
+        loginToken: loginToken
+      })
+    }
+
+    this.updateMethods = {
+      updateUserInfo: this.updateUserInfo
+    }
   }
 
   render() {
@@ -20,7 +35,7 @@ class App extends Component {
           {Object.values(routeConfigs).map((route) => (
             <Route
               path={route.path}
-              component={route.component}
+              render={route.render(this.state, this.updateMethods)}
               exact={route.exact}
             />
           ))}
