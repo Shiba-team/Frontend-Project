@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import { routeConfigs } from "../../constants/routeConfigs";
 
@@ -14,16 +14,16 @@ class DetailBucket extends React.Component {
         <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
           <Tab eventKey="home" title="Overview">
             <div className="d-flex mt-4 mb-4">
-              <a
+              <Link
                 href={routeConfigs.upload.path}
                 className="btn btn-primary pl-3 pr-3"
               >
                 <i className="fa fa-upload mr-2"> </i>Upload
-              </a>
+              </Link>
 
-              <a href="#" className="btn btn-danger pl-3 pr-3 ml-3">
+              <Link href="#" className="btn btn-danger pl-3 pr-3 ml-3">
                 <i className="fa fa-trash mr-2"> </i>Delete
-              </a>
+              </Link>
             </div>
 
             <table id="sort" className="table table-hover w-100 table-bordered">

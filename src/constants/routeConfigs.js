@@ -1,16 +1,22 @@
-import Login from "../containers/Login";
+import Login from "../components/Login";
 import Register from "../containers/Register";
 import UploadPage from "../upload-flow/UploadPage";
 import ManageBucket from "../containers/ManageBucket";
 import Home from "../containers/Home/index";
 import DetailBucket from "../containers/DetailBucket";
+import MinioHome from "../components/MinioHome";
 
 export const routeConfigs = {
   login: {
     path: "/login",
     component: Login,
     render: (state, updateMethod) => {
-      return (props) => (<Login {...props}/>)
+      return (props) => (
+        <Login 
+          {...props}
+          updateUserInfo={updateMethod.updateUserInfo}
+        />
+      )
     },
     exact: true,
   },
@@ -33,12 +39,11 @@ export const routeConfigs = {
   upload: {
     path: "/upload",
     component: UploadPage,
-    render: (app) => {
+    render: (state, updateMethod) => {
       return (props) => (
         <UploadPage 
           {...props}
-          userId={app.state.userId}
-          loginToken={app.state.loginToken}
+          userInfo={state.userInfo}
         />
       )
     },
@@ -59,4 +64,20 @@ export const routeConfigs = {
       return (props) => (<DetailBucket {...props}/>)
     },
   },
+  MinioHome: {
+    path: '/minioHome',
+    component: MinioHome,
+    render: (state, updateMethod) => {
+      return (props) => (
+        <MinioHome 
+          {...props}
+          userInfo={state.userInfo}
+          buckets={state.buckets}
+          updateBucketList={updateMethod.updateBucketList}
+          updateCurrentBucket={updateMethod.updateCurrentBucket}
+          addBucket={updateMethod.addBucket}
+        />
+      )
+    },
+  }
 };

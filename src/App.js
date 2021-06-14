@@ -7,22 +7,49 @@ import { routeConfigs } from "./constants/routeConfigs";
 import Header from "./components/Header";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      userId: '12345678',
-      loginToken: 'abcdef'
+      userInfo: {
+        userId: '12345678',
+        loginToken: 'abcdef'
+      },
+      buckets: [],
+      currentBucket: {}
     }
 
     this.updateUserInfo = (userId, loginToken) => {
       this.setState({
-        userId: userId,
-        loginToken: loginToken
+        userInfo: {
+          userId: userId,
+          loginToken: loginToken
+        }
       })
     }
 
+    this.updateBucketList = (buckets) => {
+      this.setState({
+        buckets: buckets
+      })
+    }
+
+    this.updateCurrentBucket = (bucket) => {
+      this.setState({
+        currentBucket: bucket
+      })
+    }
+
+    this.addBucket = (bucket) => {
+      this.setState((state) => ({
+        buckets: [...state.buckets, bucket]
+      }))
+    }
+
     this.updateMethods = {
-      updateUserInfo: this.updateUserInfo
+      updateUserInfo: this.updateUserInfo,
+      updateBucketList: this.updateBucketList,
+      updateCurrentBucket: this.updateCurrentBucket,
+      addBucket: this.addBucket
     }
   }
 
@@ -37,6 +64,7 @@ class App extends Component {
               path={route.path}
               render={route.render(this.state, this.updateMethods)}
               exact={route.exact}
+              key={route.path}
             />
           ))}
         </BrowserRouter>

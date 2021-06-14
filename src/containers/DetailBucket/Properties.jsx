@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 class Properties extends React.Component {
   render() {
@@ -25,9 +26,9 @@ class Properties extends React.Component {
 
         <div className="label">Link</div>
         <div className="value">
-          <a>
+          <Link href='#'>
             https://s3.ap-south-1.amazonaws.com/unixarena/VMware+vsphere+SRM.jpg
-          </a>
+          </Link>
         </div>
       </div>
     );
