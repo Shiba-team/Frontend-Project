@@ -15,7 +15,7 @@ class App extends Component {
         loginToken: 'abcdef'
       },
       buckets: [],
-      currentBucket: {}
+      currentBucket: undefined
     }
 
     this.updateUserInfo = (userId, loginToken) => {

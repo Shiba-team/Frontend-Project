@@ -73,6 +73,7 @@ export const routeConfigs = {
           {...props}
           userInfo={state.userInfo}
           buckets={state.buckets}
+          currentBucket={state.currentBucket}
           updateBucketList={updateMethod.updateBucketList}
           updateCurrentBucket={updateMethod.updateCurrentBucket}
           addBucket={updateMethod.addBucket}

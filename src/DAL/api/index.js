@@ -41,3 +41,14 @@ export function createBucketApi(userId, loginToken, bucketName){
     })
     return createBucketPromise
 }
+
+export function getFolderContentApi(userId, loginToken, BucketId, folderId){
+    const getFolderContentPromise = new Promise((resolve, reject) => {
+        resolve({
+            parentFolderId: folderId,
+            folderIds: [folderId + 'folder1',folderId +  'folder2',folderId +  'folder3'],
+            objectIds: [folderId + 'file1',folderId +  'file2',folderId +  'file3']
+        })
+    })
+    return getFolderContentPromise
+}
