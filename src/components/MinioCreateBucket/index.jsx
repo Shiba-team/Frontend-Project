@@ -9,20 +9,7 @@ class MinioCreateBucket extends Component{
 
         this.createBucket = () => {
             const bucketName = document.querySelector('#createBucket').value
-
-            createBucketApi(
-                this.props.userInfo.userId,
-                this.props.userInfo.loginToken,
-                bucketName
-            ).then((data) => {
-                getBucketInfoApi(
-                    this.props.userInfo.userId,
-                    this.props.userInfo.loginToken,
-                    data.bucketId
-                ).then(bucket => {
-                    this.props.addBucket(bucket)
-                })
-            })
+            this.props.createBucket(bucketName)
         }
     }
 

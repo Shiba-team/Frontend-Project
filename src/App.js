@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-
 import { BrowserRouter, Route } from "react-router-dom";
-
 import { routeConfigs } from "./constants/routeConfigs";
-
 import Header from "./components/Header";
+import {
+  getUserBuckets,
+  createBucket,
+  getFolder
+} from './BLL/bucketServices'
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +16,9 @@ class App extends Component {
         userId: '12345678',
         loginToken: 'abcdef'
       },
-      buckets: [],
-      currentBucket: undefined
+      userBuckets: [],
+      currentBucket: undefined,
+      currentFolder: undefined
     }
 
     this.updateUserInfo = (userId, loginToken) => {
@@ -27,29 +30,50 @@ class App extends Component {
       })
     }
 
-    this.updateBucketList = (buckets) => {
+    this.getUserBuckets = () => {
+      getUserBuckets(this.state.userInfo)
+        .then((buckets) => {
+          this.setState({
+            userBuckets: buckets
+          })
+        })
+    }
+
+    this.selectBucket = (bucketId) => {
+      const selectedBucket = this.state.userBuckets
+        .filter((bucket) => bucket.id === bucketId)[0]
       this.setState({
-        buckets: buckets
+        currentBucket: selectedBucket
+      })
+      getFolder(
+        this.state.userInfo,
+        selectedBucket.id,
+        selectedBucket.rootFolderId
+      ).then((folder) => {
+        this.setState({
+          currentFolder: folder
+        })
       })
     }
 
-    this.updateCurrentBucket = (bucket) => {
-      this.setState({
-        currentBucket: bucket
-      })
+    this.createBucket = (bucketName) => {
+      createBucket(this.state.userInfo, bucketName)
+        .then((newBucket) => {
+          this.addBucket(newBucket)
+        })
     }
 
     this.addBucket = (bucket) => {
       this.setState((state) => ({
-        buckets: [...state.buckets, bucket]
+        userBuckets: [...state.userBuckets, bucket]
       }))
     }
 
-    this.updateMethods = {
+    this.methods = {
       updateUserInfo: this.updateUserInfo,
-      updateBucketList: this.updateBucketList,
-      updateCurrentBucket: this.updateCurrentBucket,
-      addBucket: this.addBucket
+      getUserBuckets: this.getUserBuckets,
+      selectBucket: this.selectBucket,
+      createBucket: this.createBucket
     }
   }
 
@@ -57,12 +81,11 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        
         <BrowserRouter>
           {Object.values(routeConfigs).map((route) => (
             <Route
               path={route.path}
-              render={route.render(this.state, this.updateMethods)}
+              render={route.render(this.state, this.methods)}
               exact={route.exact}
               key={route.path}
             />

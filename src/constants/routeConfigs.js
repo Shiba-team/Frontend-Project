@@ -1,3 +1,4 @@
+import React from 'react';
 import Login from "../components/Login";
 import Register from "../containers/Register";
 import UploadPage from "../upload-flow/UploadPage";
@@ -10,11 +11,11 @@ export const routeConfigs = {
   login: {
     path: "/login",
     component: Login,
-    render: (state, updateMethod) => {
+    render: (state, method) => {
       return (props) => (
-        <Login 
+        <Login
           {...props}
-          updateUserInfo={updateMethod.updateUserInfo}
+          updateUserInfo={method.updateUserInfo}
         />
       )
     },
@@ -23,25 +24,25 @@ export const routeConfigs = {
   register: {
     path: "/register",
     component: Register,
-    render: (state, updateMethod) => {
-      return (props) => (<Register {...props}/>)
+    render: (state, method) => {
+      return (props) => (<Register {...props} />)
     },
     exact: true,
   },
   home: {
     path: "/",
     component: Home,
-    render: (state, updateMethod) => {
-      return (props) => (<Home {...props}/>)
+    render: (state, method) => {
+      return (props) => (<Home {...props} />)
     },
     exact: true,
   },
   upload: {
     path: "/upload",
     component: UploadPage,
-    render: (state, updateMethod) => {
+    render: (state, method) => {
       return (props) => (
-        <UploadPage 
+        <UploadPage
           {...props}
           userInfo={state.userInfo}
         />
@@ -52,31 +53,38 @@ export const routeConfigs = {
   manageBucket: {
     path: "/manage-bucket",
     component: ManageBucket,
-    render: (state, updateMethod) => {
-      return (props) => (<ManageBucket {...props}/>)
+    render: (state, method) => {
+      return (props) => (<ManageBucket {...props} />)
     },
     exact: true,
   },
   detailBucket: {
     path: "/detail-bucket",
     component: DetailBucket,
-    render: (state, updateMethod) => {
-      return (props) => (<DetailBucket {...props}/>)
+    render: (state, method) => {
+      return (props) => (<DetailBucket {...props} />)
     },
   },
   MinioHome: {
     path: '/minioHome',
     component: MinioHome,
-    render: (state, updateMethod) => {
+    render: (state, method) => {
       return (props) => (
-        <MinioHome 
+        <MinioHome
           {...props}
-          userInfo={state.userInfo}
-          buckets={state.buckets}
+          userBuckets={state.userBuckets}
           currentBucket={state.currentBucket}
-          updateBucketList={updateMethod.updateBucketList}
-          updateCurrentBucket={updateMethod.updateCurrentBucket}
-          addBucket={updateMethod.addBucket}
+          currentFolder={state.currentFolder}
+
+          getUserBuckets={method.getUserBuckets}
+          selectBucket={method.selectBucket}
+          createBucket={method.createBucket}
+          selectFolder={method.selectFolder}
+          selectFile={method.selectFile}
+          deleteFolder={method.deleteFolder}
+          deleteFile={method.deleteFile}
+          downloadFolder={method.downloadFolder}
+          downloadFile={method.downloadFile}
         />
       )
     },

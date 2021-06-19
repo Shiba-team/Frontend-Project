@@ -1,4 +1,4 @@
-// khi nào có API thì thay các promise bên dưới bằng fetch
+// Khi nào có API thì thay các promise bên dưới bằng fetch.
 
 export function loginApi(email, password) {    
     const loginPromise = new Promise((resolve, reject) => {
@@ -36,7 +36,8 @@ export function getBucketInfoApi(userId, loginToken, bucketId){
 export function createBucketApi(userId, loginToken, bucketName){
     const createBucketPromise = new Promise((resolve, reject) => {
         resolve({
-            bucketId: bucketName
+            bucketId: bucketName,
+            bucketName: bucketName
         })
     })
     return createBucketPromise
@@ -45,9 +46,10 @@ export function createBucketApi(userId, loginToken, bucketName){
 export function getFolderContentApi(userId, loginToken, BucketId, folderId){
     const getFolderContentPromise = new Promise((resolve, reject) => {
         resolve({
-            parentFolderId: folderId,
-            folderIds: [folderId + 'folder1',folderId +  'folder2',folderId +  'folder3'],
-            objectIds: [folderId + 'file1',folderId +  'file2',folderId +  'file3']
+            id: folderId,
+            name: folderId,
+            folderIds: [folderId + '-folder1',folderId +  '-folder2',folderId +  '-folder3'],
+            objectIds: [folderId + '-file1',folderId +  '-file2',folderId +  '-file3']
         })
     })
     return getFolderContentPromise
